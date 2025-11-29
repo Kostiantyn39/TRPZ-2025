@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>FTP Manager</title>
+    <style>
+        body { font-family: sans-serif; padding: 20px; }
+        table { border-collapse: collapse; width: 100%; margin-top: 20px; }
+        th, td { border: 1px solid #ddd; padding: 8px; text-align: left; }
+        th { background-color: #f2f2f2; }
+        .form-group { margin-bottom: 10px; }
+        label { display: inline-block; width: 150px; }
+    </style>
+</head>
+<body>
+    <h1>FTP User Management</h1>
+    <a href="/stats">View Connection Logs</a>
+    
+    <h3>Create New User</h3>
+    <form th:action="@{/addUser}" th:object="${newUser}" method="post">
+        <div class="form-group"><label>Username:</label><input type="text" th:field="*{username}" required/></div>
+        <div class="form-group"><label>Password:</label><input type="text" th:field="*{password}" required/></div>
+        <div class="form-group"><label>Home Dir (e.g. C:/ftp/u1):</label><input type="text" th:field="*{homeDirectory}" required/></div>
+        <div class="form-group"><label>Can Write:</label><input type="checkbox" th:field="*{canWrite}"/></div>
+        <div class="form-group"><label>Max Upload (bytes/s):</label><input type="number" th:field="*{maxUploadRate}"/></div>
+        <div class="form-group"><label>Max Download (bytes/s):</label><input type="number" th:field="*{maxDownloadRate}"/></div>
+        <button type="submit">Save User</button>
+    </form>
+
+    <h3>Existing Users</h3>
+    <table>
+        <thead>
+            <tr>
+                <th>Username</th>
+                <th>Home Directory</th>
+                <th>Can Write</th>
+                <th>Upload Limit</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:each="user : ${users}">
+                <td th:text="${user.username}"></td>
+                <td th:text="${user.homeDirectory}"></td>
+                <td th:text="${user.canWrite}"></td>
+                <td th:text="${user.maxUploadRate}"></td>
+            </tr>
+        </tbody>
+    </table>
+</body>
+</html>
