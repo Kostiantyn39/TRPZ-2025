@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head><title>FTP Manager</title></head>
+<body style="font-family: sans-serif; padding: 20px;">
+    <h1>FTP User Manager</h1>
+    <form th:action="@{/addUser}" th:object="${newUser}" method="post" style="background:#f0f0f0; padding:15px;">
+        <input type="text" th:field="*{username}" placeholder="Username (e.g. admin_test)" required/>
+        <input type="text" th:field="*{password}" placeholder="Password" required/>
+        <input type="text" th:field="*{homeDirectory}" placeholder="Home Dir (C:/ftp/user)" required/>
+        <label>Can write? <input type="checkbox" th:field="*{canWrite}"/></label>
+        <input type="number" th:field="*{maxUploadRate}" placeholder="Max Upload"/>
+        <button type="submit">Create User</button>
+    </form>
+    <br>
+    <table border="1" cellpadding="5">
+        <tr><th>User</th><th>Home</th><th>Write</th><th>Upload Limit</th></tr>
+        <tr th:each="user : ${users}">
+            <td th:text="${user.username}"></td>
+            <td th:text="${user.homeDirectory}"></td>
+            <td th:text="${user.canWrite}"></td>
+            <td th:text="${user.maxUploadRate}"></td>
+        </tr>
+    </table>
+</body>
+</html>
