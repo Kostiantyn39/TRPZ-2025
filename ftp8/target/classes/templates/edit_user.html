@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Edit User</title>
+    <style>
+        body { font-family: sans-serif; padding: 20px; }
+        .container { max-width: 500px; margin: 0 auto; background: #f9f9f9; padding: 20px; border: 1px solid #ccc;}
+        input[type="text"], input[type="number"] { width: 100%; padding: 8px; margin: 5px 0; }
+        .btn { padding: 10px 15px; text-decoration: none; color: white; display: inline-block; margin-right: 10px;}
+        .btn-save { background-color: #4CAF50; border: none; cursor: pointer;}
+        .btn-undo { background-color: #f44336; }
+        .btn-back { background-color: #555; }
+    </style>
+</head>
+<body>
+<div class="container">
+    <h2>Edit User: <span th:text="${user.username}"></span></h2>
+    
+    <form th:action="@{/updateUser}" th:object="${user}" method="post">
+        <input type="hidden" th:field="*{id}"/>
+        <input type="hidden" th:field="*{password}"/>
+        
+        <label>Username:</label>
+        <input type="text" th:field="*{username}" readonly style="background: #e0e0e0;"/>
+        
+        <label>Home Directory:</label>
+        <input type="text" th:field="*{homeDirectory}"/>
+        
+        <label>Can Write:</label>
+        <input type="checkbox" th:field="*{canWrite}"/>
+        <br><br>
+        
+        <label>Max Upload Rate (0 = unlimited):</label>
+        <input type="number" th:field="*{maxUploadRate}"/>
+        
+        <br><br>
+        <button type="submit" class="btn btn-save">Update & Save State</button>
+        
+        <a th:if="${canUndo}" th:href="@{/undo/{id}(id=${user.id})}" class="btn btn-undo">Undo Changes</a>
+        <a href="/" class="btn btn-back">Back to List</a>
+    </form>
+</div>
+</body>
+</html>

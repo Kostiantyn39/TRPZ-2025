@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>User Analysis</title>
+    <style>
+        body { font-family: sans-serif; padding: 20px; }
+        .box { background: #f4f4f4; padding: 15px; border-radius: 5px; margin-bottom: 20px; }
+        pre { background: #333; color: #fff; padding: 10px; overflow-x: auto; }
+        .btn { display: inline-block; padding: 10px 20px; background: #007bff; color: white; text-decoration: none; border-radius: 5px;}
+    </style>
+</head>
+<body>
+    <h1>Analysis for user: <span th:text="${user.username}"></span></h1>
+    
+    <div class="box">
+        <h3>Disk Usage Report (Visitor 1)</h3>
+        <p style="font-size: 1.2em; font-weight: bold;" th:text="${report}"></p>
+    </div>
+
+    <div class="box">
+        <h3>File Structure (Visitor 2)</h3>
+        <pre th:text="${structure}"></pre>
+    </div>
+
+    <a href="/" class="btn">Back to Users</a>
+</body>
+</html>

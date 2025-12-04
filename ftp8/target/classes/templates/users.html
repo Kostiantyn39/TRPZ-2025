@@ -1,0 +1,22 @@
+<table>
+        <thead>
+            <tr>
+                <th>Username</th>
+                <th>Home Directory</th>
+                <th>Can Write</th>
+                <th>Upload Limit</th>
+                <th>Actions</th> </tr>
+        </thead>
+        <tbody>
+            <tr th:each="user : ${users}">
+                <td th:text="${user.username}"></td>
+                <td th:text="${user.homeDirectory}"></td>
+                <td th:text="${user.canWrite}"></td>
+                <td th:text="${user.maxUploadRate}"></td>
+                <td>
+                    <a th:href="@{/edit/{id}(id=${user.id})}">Edit</a>
+                    <a th:href="@{/analyze/{id}(id=${user.id})}">Analyze</a>
+                </td>
+            </tr>
+        </tbody>
+    </table>
